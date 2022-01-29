@@ -7,15 +7,15 @@ using UnityEngine;
 // 2. Add x collision, using above 2d changes to modify video 2 script
 // 3. Add more keybinds to player controls with more scripts
 
-[RequireComponent (typeof(BoxCollider))]
+[RequireComponent (typeof(BoxCollider2D))]
 public class PlayerPhysics : MonoBehaviour
 {
 
     public LayerMask collisionMask;
 
-    private BoxCollider collider;
-    private Vector3 size;
-    private Vector3 centre;
+    private BoxCollider2D collider;
+    private Vector2 size;
+    private Vector2 centre;
 
     private float skin = .005f; // distance between player raycast and ground
 
@@ -25,13 +25,16 @@ public class PlayerPhysics : MonoBehaviour
     public bool movementStopped;
 
 
-    Ray ray;
-    RaycastHit hit;
+    Ray2D ray;
+    RaycastHit2D hit;
 
     void Start() {
-        collider = GetComponent<BoxCollider>();
-        size = collider.size;
-        centre = collider.center;
+        collider = GetComponent<BoxCollider2D>();
+        size = collider.bounds.size;
+        centre = collider.bounds.center;
+
+        print(size);
+        print(centre);
     }
 
     public void Move(Vector2 moveAmount) {
@@ -44,14 +47,16 @@ public class PlayerPhysics : MonoBehaviour
         grounded = false;
         for (int i = 0; i < 3; i++) {
             float dir = Mathf.Sign(deltaY);
-            float x = (pos.x + centre.x - size.x/2) + size.x/2 * i; // left, centre, and right of collider
-            float y = pos.y + centre.y + size.y/2 * dir; // bottom of collider
+            float x = (pos.x - size.x/2) + size.x/2 * i; // left, centre, and right of collider
+            float y = pos.y + size.y/2 * dir; // bottom of collider
 
-            ray = new Ray(new Vector2(x,y), new Vector2(0, dir));
+            ray = new Ray2D(new Vector2(x,y), new Vector2(0, dir));
+            Debug.DrawRay(ray.origin, ray.direction);
+            hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Abs(deltaY) + skin, collisionMask);
 
-            if (Physics.Raycast(ray, out hit, Mathf.Abs(deltaY) + skin, collisionMask)) {
+            if (hit.collider != null) {
                 // get distance between player and ground
-                float distance = Vector3.Distance(ray.origin, hit.point);
+                float distance = Vector2.Distance(ray.origin, hit.point);
 
                 // Stop player's downwards movement after coming within skin of a collider
                 if (distance > skin) {
@@ -69,13 +74,16 @@ public class PlayerPhysics : MonoBehaviour
         movementStopped = false;
         for (int i = 0; i < 3; i++) {
             float dir = Mathf.Sign(deltaX);
-            float x = pos.x + centre.x + size.x/2 * dir;
-            float y = pos.y + centre.y - size.y/2 + size.y/2 * i ; 
-            ray = new Ray(new Vector2(x,y), new Vector2(dir, 0));
+            float x = pos.x + size.x/2 * dir;
+            float y = pos.y - size.y/2 + size.y/2 * i ; 
 
-            if (Physics.Raycast(ray, out hit, Mathf.Abs(deltaX) + skin, collisionMask)) {
+            ray = new Ray2D(new Vector2(x,y), new Vector2(dir, 0));
+            Debug.DrawRay(ray.origin, ray.direction);
+            hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Abs(deltaY) + skin, collisionMask);
+
+            if (hit.collider != null) {
                 // get distance between player and ground
-                float distance = Vector3.Distance(ray.origin, hit.point);
+                float distance = Vector2.Distance(ray.origin, hit.point);
 
                 // Stop player's downwards movement after coming within skin of a collider
                 if (distance > skin) {
