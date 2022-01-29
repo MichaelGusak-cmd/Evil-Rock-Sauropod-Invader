@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
             amountToMove.y = 0;
 
             // Jump, default is "Space", change to getKeyPressed() to check for W
-            if(Input.GetButtonDown("Jump")) {
+            if(Input.GetKeyDown("w")) {
                 amountToMove.y = jumpHeight;
             }
         }
