@@ -10,28 +10,27 @@ public class EnemyMovement : MonoBehaviour
     private float movementRange;
     private bool flipped;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
         enemyX = transform.position.x;
         movementRange = enemyX + 2F;
         speed = 0.0001F;
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-      if(enemyX > movementRange){
-        move.x = 0;
-        speed = -0.0001F;
+      if (enemyX > movementRange)
+      {
+          move.x = 0;
+          speed = -0.0001F;
       }
-      if(enemyX < -movementRange){
-        
-        move.x = 0;
-        speed = 0.0001F;
+      
+      if (enemyX < -movementRange) 
+      {
+          move.x = 0; 
+          speed = 0.0001F; 
       }
 
       move.x += speed;
