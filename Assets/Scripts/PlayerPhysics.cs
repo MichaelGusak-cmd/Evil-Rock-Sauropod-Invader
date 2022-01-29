@@ -21,6 +21,9 @@ public class PlayerPhysics : MonoBehaviour
 
     [HideInInspector]
     public bool grounded;
+    [HideInInspector]
+    public bool movementStopped;
+
 
     Ray ray;
     RaycastHit hit;
@@ -37,6 +40,7 @@ public class PlayerPhysics : MonoBehaviour
         float deltaX = moveAmount.x;
         Vector2 pos = transform.position;
 
+        // check collisions above and below
         grounded = false;
         for (int i = 0; i < 3; i++) {
             float dir = Mathf.Sign(deltaY);
@@ -57,6 +61,31 @@ public class PlayerPhysics : MonoBehaviour
                     deltaY = 0;
                 }
                 grounded = true;
+                break;
+            }
+        }
+
+        // check collisions left and right
+        movementStopped = false;
+        for (int i = 0; i < 3; i++) {
+            float dir = Mathf.Sign(deltaX);
+            float x = pos.x + centre.x + size.x/2 * dir;
+            float y = pos.y + centre.y - size.y/2 + size.y/2 * i ; 
+            ray = new Ray(new Vector2(x,y), new Vector2(dir, 0));
+
+            if (Physics.Raycast(ray, out hit, Mathf.Abs(deltaX) + skin, collisionMask)) {
+                // get distance between player and ground
+                float distance = Vector3.Distance(ray.origin, hit.point);
+
+                // Stop player's downwards movement after coming within skin of a collider
+                if (distance > skin) {
+                    deltaX = distance * dir - skin * dir;
+                }
+                else {
+                    deltaX = 0;
+                }
+
+                movementStopped = true;
                 break;
             }
         }

@@ -27,6 +27,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerPhysics.movementStopped) {
+            targetSpeed = 0;
+            currentSpeed = 0;
+        }
+
+        // Input
         targetSpeed = Input.GetAxisRaw("Horizontal") * speed;
         currentSpeed = IncrementTowards(currentSpeed, targetSpeed, acceleration);
 
