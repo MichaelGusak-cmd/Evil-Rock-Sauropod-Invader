@@ -10,12 +10,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnPlayer();
         cam = GetComponent<GameCamera>();
+        SpawnPlayer();
     }
 
     private void SpawnPlayer() {
-        print(player);
-        cam.SetTarget((Instantiate(player, Vector3.zero, Quaternion.identity) as GameObject).transform);
+        player = Instantiate(player, Vector2.zero, Quaternion.identity) as GameObject;
+        cam.SetTarget(player.transform);
+
     }
 }

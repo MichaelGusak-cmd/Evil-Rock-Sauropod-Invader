@@ -32,9 +32,6 @@ public class PlayerPhysics : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         size = collider.bounds.size;
         centre = collider.bounds.center;
-
-        print(size);
-        print(centre);
     }
 
     public void Move(Vector2 moveAmount) {
