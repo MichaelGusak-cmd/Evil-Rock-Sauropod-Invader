@@ -8,14 +8,15 @@ public class EnemyMovement : MonoBehaviour
     private float speed;
     private Vector2 move = new Vector2(0, 0);
     private float movementRange;
-    private bool flipped;
 
+    public float health;
     // Start is called before the first frame update
     void Start()
     {
         enemyX = transform.position.x;
         movementRange = enemyX + 2F;
         speed = 0.0001F;
+        health = 10;
     }
 
     // Update is called once per frame
@@ -37,7 +38,6 @@ public class EnemyMovement : MonoBehaviour
       enemyX = transform.position.x;
       
       transform.Translate(move); // this is what moves the object
-      //speed *= 0.95F;
     }
     
 }
