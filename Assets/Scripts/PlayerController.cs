@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
         }
 
         // Input
+
+        // TO ADD DISABLED MOVEMENTS, MODIFY HERE
         targetSpeed = Input.GetAxisRaw("Horizontal") * speed;
         currentSpeed = IncrementTowards(currentSpeed, targetSpeed, acceleration);
 

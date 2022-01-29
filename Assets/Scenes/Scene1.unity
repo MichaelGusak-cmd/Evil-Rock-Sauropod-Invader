@@ -524,6 +524,7 @@ GameObject:
   - component: {fileID: 1558390877}
   - component: {fileID: 1558390876}
   - component: {fileID: 1558390875}
+  - component: {fileID: 1558390879}
   m_Layer: 6
   m_Name: Ground 2
   m_TagString: Untagged
@@ -620,3 +621,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1558390879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558390874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e81a661a816bfd47bedb6fdc5da9c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformDelay: 0.5
+  dropDelay: 0.5
