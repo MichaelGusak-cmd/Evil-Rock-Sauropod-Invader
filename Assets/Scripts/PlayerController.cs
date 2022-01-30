@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
 
     // Player handling
-    public int playerHP = 5;
+    public int playerHP = 10;
     public float speed = 8f;
     public float acceleration = 30f;
     public float gravity = 20f;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask enemyLayer;
     private int enemylayer;
+
+    public Image[] healthPoints;
 
     private float playerInvincibleTimer;
     private bool playerInvincible;
@@ -47,6 +50,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      HealthBar();
         if(playerHP <= 0) {
             sceneManager.GetComponent<SceneChanger>().ChangeScene("DeathMenu");
         }
@@ -92,8 +96,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col){
       if(col.CompareTag("Damage")) {
-    
-        Debug.Log("hit");
+
         playerHP -= 1;
 
         playerCollider = GetComponent<BoxCollider2D>();
@@ -108,6 +111,17 @@ public class PlayerController : MonoBehaviour
         playerPhysics.Move(new Vector2(0, 0.5f));
       }
       
+    }
+
+    void HealthBar(){
+      for(int i = 0; i < 10; i++){
+        if(playerHP-1 < i){
+          healthPoints[i].enabled = false;
+        }
+        else{
+          healthPoints[i].enabled = true;
+        }
+      }
     }
 
     void OnCollisionEnter2D(Collision2D col)
