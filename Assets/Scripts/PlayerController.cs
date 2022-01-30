@@ -34,18 +34,21 @@ public class PlayerController : MonoBehaviour
     private Vector2 enemyPos;
     private Vector2 playerPos;
 
+    private GameObject sceneManager; 
+
     // Start is called before the first frame update
     void Start()
     {
         playerPhysics = GetComponent<PlayerPhysics>();
         enemylayer = (int)Mathf.Log(enemyLayer.value, 2);
+        sceneManager = GameObject.FindWithTag("SceneManager");
     }
 
     // Update is called once per frame
     void Update()
     {
         if(playerHP <= 0) {
-            SceneManager.LoadScene("DeathMenu");
+            sceneManager.GetComponent<SceneChanger>().ChangeScene("DeathMenu");
         }
 
         if (playerPhysics.movementStopped) {
