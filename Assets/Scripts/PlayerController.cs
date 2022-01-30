@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,14 +8,12 @@ public class PlayerController : MonoBehaviour
 {
 
     // Player handling
-    public int playerHP = 9;
+    public int playerHP = 5;
     public float speed = 8f;
     public float acceleration = 30f;
     public float gravity = 20f;
     public float jumpHeight = 12f;
     public float invincibilityDuration = 1.5f;
-
-    public Image[] healthPoints;
 
     public LayerMask enemyLayer;
     private int enemylayer;
@@ -32,17 +30,27 @@ public class PlayerController : MonoBehaviour
     private Enemy enemyScript;
     private bool gotScript = false;
 
+    private Collider2D playerCollider;
+    private Vector2 enemyPos;
+    private Vector2 playerPos;
+
+    private GameObject sceneManager; 
+
     // Start is called before the first frame update
     void Start()
     {
         playerPhysics = GetComponent<PlayerPhysics>();
         enemylayer = (int)Mathf.Log(enemyLayer.value, 2);
+        sceneManager = GameObject.FindWithTag("SceneManager");
     }
 
     // Update is called once per frame
     void Update()
     {
-      HealthBar();
+        if(playerHP <= 0) {
+            sceneManager.GetComponent<SceneChanger>().ChangeScene("DeathMenu");
+        }
+
         if (playerPhysics.movementStopped) {
             targetSpeed = 0;
             currentSpeed = 0;
@@ -83,39 +91,30 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col){
-      if(col.CompareTag("Switch")){
+      if(col.CompareTag("Damage")) {
+    
+        Debug.Log("hit");
         playerHP -= 1;
-        Debug.Log("switch hit");
+
+        playerCollider = GetComponent<BoxCollider2D>();
+        
+        enemyPos = col.bounds.center;
+        playerPos = playerCollider.bounds.center;
+
+        playerPhysics.movementStopped = false;
+        currentSpeed = (playerPos.x - enemyPos.x) * 10;
+        amountToMove.y = Mathf.Abs(playerPos.y - enemyPos.y) * 10;
+
+        playerPhysics.Move(new Vector2(0, 0.5f));
       }
-
-      if(col.CompareTag("Xbox") || col.CompareTag("PS5")){
-        playerHP -= 2;
-        Debug.Log("boss hit");
-      }
-    }
-
-    void HealthBar(){
-      for(int i = 0; i < 10; i++){
-
-        if(playerHP < i){
-          healthPoints[i].enabled = false;
-        }
-        else{
-          healthPoints[i].enabled = true;
-        }
-         
-      }
-    }
-
-    bool HealthHelper(float hp, int pointNum){
-      Debug.Log("Curr HP: "+hp + "cycle: "+pointNum);
-      return ((pointNum *10) >= hp);
+      
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
       //Debug.Log("hit");
       //if col is on layer enemy:
+      print("I'm here!");
       GameObject obj = col.gameObject;
       if (obj.layer == enemyLayer)
       {
@@ -140,5 +139,6 @@ public class PlayerController : MonoBehaviour
           }
       }
     }
+
 }
 //scriptName = gameObject.GetComponent<ScriptName>();
