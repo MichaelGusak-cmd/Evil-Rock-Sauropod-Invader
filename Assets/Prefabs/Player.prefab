@@ -141,15 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2160484c132a05e43981b1372c75d50c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: 5
   speed: 8
   acceleration: 30
   gravity: 20
   jumpHeight: 12
-  invincibilityDuration: 1.5
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &587551424630005780
 MonoBehaviour:
   m_ObjectHideFlags: 0
