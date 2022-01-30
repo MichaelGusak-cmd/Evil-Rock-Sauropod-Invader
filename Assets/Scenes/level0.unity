@@ -440,9 +440,10 @@ GameObject:
   - component: {fileID: 449074541}
   - component: {fileID: 449074546}
   - component: {fileID: 449074545}
+  - component: {fileID: 449074547}
   m_Layer: 0
   m_Name: Switch
-  m_TagString: Untagged
+  m_TagString: Damage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -474,7 +475,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0013515949, y: -0.003050208}
@@ -584,6 +585,27 @@ MonoBehaviour:
   health: 10
   objectSpeed: 0.00005
   speed: 0
+--- !u!50 &449074547
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449074540}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &537010882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -740,7 +762,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8721937273351260512, guid: d59efcc157244d041be093d9ff460a65, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8721937273351260514, guid: d59efcc157244d041be093d9ff460a65, type: 3}
       propertyPath: m_RootOrder
@@ -796,6 +818,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d59efcc157244d041be093d9ff460a65, type: 3}
+--- !u!1 &712720706 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8721937273351260527, guid: d59efcc157244d041be093d9ff460a65, type: 3}
+  m_PrefabInstance: {fileID: 618807937}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &712720712
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712720706}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &726871993
 GameObject:
   m_ObjectHideFlags: 0
