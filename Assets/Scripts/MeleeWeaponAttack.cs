@@ -32,7 +32,7 @@ public class MeleeWeaponAttack : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         dirUpdate = Input.GetAxisRaw("Horizontal");
         

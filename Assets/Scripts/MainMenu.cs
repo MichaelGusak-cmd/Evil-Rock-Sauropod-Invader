@@ -5,9 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+	public GameObject sceneManager; 
+
+	public void Start() {
+		sceneManager = GameObject.FindWithTag("SceneManager");
+	}
+
 	public void PlayGame() 
 	{	
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		sceneManager.GetComponent<SceneChanger>().ChangeScene("level0");
 	}
 
 	public void QuitGame()
