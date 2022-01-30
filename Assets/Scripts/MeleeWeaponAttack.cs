@@ -53,6 +53,7 @@ public class MeleeWeaponAttack : MonoBehaviour
     IEnumerator SwingWeapon() 
     {
         attacking = true;
+        weapon.tag = "PlayerWeapon";
         weapon.transform.Rotate(new Vector3(0,0,-90 * dir));
         adjustX = 1;
         adjustY = -10;
@@ -60,6 +61,7 @@ public class MeleeWeaponAttack : MonoBehaviour
         adjustX = 4;
         adjustY = 3;
         weapon.transform.Rotate(new Vector3(0,0,90 * dir));
+        weapon.tag = "Untagged";
         yield return new WaitForSeconds( 0.2f );
         attacking = false;
 
