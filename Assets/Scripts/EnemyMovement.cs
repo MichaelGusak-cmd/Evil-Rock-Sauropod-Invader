@@ -6,9 +6,10 @@ public class EnemyMovement : MonoBehaviour{
 
     public float range = 3F;
     public float health = 10;
+    public float objectSpeed = 0.00005F;
 
     private float enemyX, baseX;
-    private float speed;
+    public float speed = 0.00005F;
 
     private Vector2 move = new Vector2(0, 0);
 
@@ -16,19 +17,19 @@ public class EnemyMovement : MonoBehaviour{
     void Start(){
         enemyX = transform.position.x; //get current position
         baseX = enemyX; // save origin position
-        speed = 0.0001F; // speed constant
+        speed = objectSpeed; // speed constant
     }
 
     // Update is called once per frame
     void Update(){
       if (enemyX > baseX+range){
           move.x = 0;
-          speed = -0.0001F;
+          speed = -objectSpeed;
       }
       
       if (enemyX < baseX-range) {
           move.x = 0; 
-          speed = 0.0001F; 
+          speed = objectSpeed; 
       }
 
       move.x += speed;
