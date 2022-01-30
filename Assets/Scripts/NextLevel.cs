@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class NextLevel : MonoBehaviour
 {
+    public string NextScene = "DeathMenu";
+
+    private GameObject sceneManager; 
     // Start is called before the first frame update
     void Start()
     {
-        
+        sceneManager = GameObject.FindWithTag("SceneManager");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void OnTriggerEnter2D (Collider2D other) {
+        print("Trigger");
+        if (other.CompareTag("Player")) {
+            sceneManager.GetComponent<SceneChanger>().ChangeScene(NextScene);
+        }
     }
 }

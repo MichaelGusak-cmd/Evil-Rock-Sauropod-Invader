@@ -21,7 +21,7 @@ public class SceneChanger : MonoBehaviour
 		currScene = sceneName;
 		SceneManager.LoadScene(sceneName);
 	}
-
+  
 	public void PrevScene() 
 	{
 		currScene = prevScene;
