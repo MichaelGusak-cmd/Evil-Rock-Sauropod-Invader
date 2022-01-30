@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -33,16 +34,23 @@ public class PlayerController : MonoBehaviour
     private Vector2 enemyPos;
     private Vector2 playerPos;
 
+    private GameObject sceneManager; 
+
     // Start is called before the first frame update
     void Start()
     {
         playerPhysics = GetComponent<PlayerPhysics>();
         enemylayer = (int)Mathf.Log(enemyLayer.value, 2);
+        sceneManager = GameObject.FindWithTag("SceneManager");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(playerHP <= 0) {
+            sceneManager.GetComponent<SceneChanger>().ChangeScene("DeathMenu");
+        }
+
         if (playerPhysics.movementStopped) {
             targetSpeed = 0;
             currentSpeed = 0;
