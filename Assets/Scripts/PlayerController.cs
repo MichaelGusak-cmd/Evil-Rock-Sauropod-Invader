@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     private Enemy enemyScript;
     private bool gotScript = false;
 
+    private Collider2D playerCollider;
+    private Vector2 enemyPos;
+    private Vector2 playerPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,12 +85,24 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col){
       Debug.Log("hit");
       playerHP -= 1;
+
+      playerCollider = GetComponent<BoxCollider2D>();
+      
+      enemyPos = col.bounds.center;
+      playerPos = playerCollider.bounds.center;
+
+      playerPhysics.movementStopped = false;
+      currentSpeed = (playerPos.x - enemyPos.x) * 10;
+      amountToMove.y = Mathf.Abs(playerPos.y - enemyPos.y) * 10;
+
+      playerPhysics.Move(new Vector2(0, 0.5f));
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
       //Debug.Log("hit");
       //if col is on layer enemy:
+      print("I'm here!");
       GameObject obj = col.gameObject;
       if (obj.layer == enemyLayer)
       {
