@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.Log("hit");
         //if col is on layer enemy:
         GameObject obj = col.gameObject;
         if (obj.layer == enemyLayer)
@@ -98,6 +99,7 @@ public class PlayerController : MonoBehaviour
             //take damage, make invincible
             if (!playerInvincible)
             {
+               
                 playerHP -= enemyScript.damage;
                 playerInvincibleTimer = Time.time + invincibilityDuration;
                 playerInvincible = true;
