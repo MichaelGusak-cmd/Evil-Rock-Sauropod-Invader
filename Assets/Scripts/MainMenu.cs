@@ -21,4 +21,14 @@ public class MainMenu : MonoBehaviour
 		Debug.Log("Quit!");
 		Application.Quit();
 	}
+
+	public void OnMouseOver()
+	{
+		Debug.Log("mouse over");
+	}
+	public void OnMouseExit()
+	{
+		//The mouse is no longer hovering over the GameObject so output this message each frame
+		Debug.Log("Mouse is no longer on GameObject.");
+	}
 }
