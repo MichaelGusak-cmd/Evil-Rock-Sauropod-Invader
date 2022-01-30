@@ -44,7 +44,7 @@ public class PlayerPhysics : MonoBehaviour
         grounded = false;
         for (int i = 0; i < 3; i++) {
             float dir = Mathf.Sign(deltaY);
-            float x = (pos.x - size.x/2) + size.x/2 * i; // left, centre, and right of collider
+            float x = (pos.x - size.x/2.15f) + size.x/2.15f * i; // left, centre, and right of collider
             float y = pos.y + size.y/2 * dir; // bottom of collider
 
             ray = new Ray2D(new Vector2(x,y), new Vector2(0, dir));
@@ -72,7 +72,7 @@ public class PlayerPhysics : MonoBehaviour
         for (int i = 0; i < 3; i++) {
             float dir = Mathf.Sign(deltaX);
             float x = pos.x + size.x/2 * dir;
-            float y = pos.y - size.y/2 + size.y/2 * i ; 
+            float y = pos.y - size.y/2.05f + size.y/2.05f * i ; 
 
             ray = new Ray2D(new Vector2(x,y), new Vector2(dir, 0));
             Debug.DrawRay(ray.origin, ray.direction);
