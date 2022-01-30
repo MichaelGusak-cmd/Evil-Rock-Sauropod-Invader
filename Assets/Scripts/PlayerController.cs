@@ -78,33 +78,38 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D col){
+      Debug.Log("hit");
+      playerHP -= 1;
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("hit");
-        //if col is on layer enemy:
-        GameObject obj = col.gameObject;
-        if (obj.layer == enemyLayer)
-        {
-            if (!gotScript)
-            {
-                enemyScript = obj.GetComponent<Enemy>(); //Assumes the existence of an "Enemy.cs" script
-                gotScript = true;
-            }
+      //Debug.Log("hit");
+      //if col is on layer enemy:
+      GameObject obj = col.gameObject;
+      if (obj.layer == enemyLayer)
+      {
+          if (!gotScript)
+          {
+              enemyScript = obj.GetComponent<Enemy>(); //Assumes the existence of an "Enemy.cs" script
+              gotScript = true;
+          }
 
-            if (Time.time > playerInvincibleTimer)
-            { //if the player invincibility duration ran out
-                playerInvincible = false;
-            }
-            
-            //take damage, make invincible
-            if (!playerInvincible)
-            {
-               
-                playerHP -= enemyScript.damage;
-                playerInvincibleTimer = Time.time + invincibilityDuration;
-                playerInvincible = true;
-            }
-        }
+          if (Time.time > playerInvincibleTimer)
+          { //if the player invincibility duration ran out
+              playerInvincible = false;
+          }
+          
+          //take damage, make invincible
+          if (!playerInvincible)
+          {
+              
+              playerHP -= enemyScript.damage;
+              playerInvincibleTimer = Time.time + invincibilityDuration;
+              playerInvincible = true;
+          }
+      }
     }
 }
 //scriptName = gameObject.GetComponent<ScriptName>();
