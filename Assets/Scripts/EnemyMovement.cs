@@ -16,7 +16,7 @@ public class EnemyMovement : MonoBehaviour
         enemyX = transform.position.x;
         movementRange = enemyX + 2F;
         speed = 0.0001F;
-        health = 10;
+        health = 9;
     }
 
     // Update is called once per frame
