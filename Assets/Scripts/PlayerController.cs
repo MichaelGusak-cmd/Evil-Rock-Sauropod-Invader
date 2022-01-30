@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,12 +8,14 @@ public class PlayerController : MonoBehaviour
 {
 
     // Player handling
-    public int playerHP = 5;
+    public int playerHP = 9;
     public float speed = 8f;
     public float acceleration = 30f;
     public float gravity = 20f;
     public float jumpHeight = 12f;
     public float invincibilityDuration = 1.5f;
+
+    public Image[] healthPoints;
 
     public LayerMask enemyLayer;
     private int enemylayer;
@@ -39,6 +42,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      HealthBar();
         if (playerPhysics.movementStopped) {
             targetSpeed = 0;
             currentSpeed = 0;
@@ -79,8 +83,33 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col){
-      Debug.Log("hit");
-      playerHP -= 1;
+      if(col.CompareTag("Switch")){
+        playerHP -= 1;
+        Debug.Log("switch hit");
+      }
+
+      if(col.CompareTag("Xbox") || col.CompareTag("PS5")){
+        playerHP -= 2;
+        Debug.Log("boss hit");
+      }
+    }
+
+    void HealthBar(){
+      for(int i = 0; i < 10; i++){
+
+        if(playerHP < i){
+          healthPoints[i].enabled = false;
+        }
+        else{
+          healthPoints[i].enabled = true;
+        }
+         
+      }
+    }
+
+    bool HealthHelper(float hp, int pointNum){
+      Debug.Log("Curr HP: "+hp + "cycle: "+pointNum);
+      return ((pointNum *10) >= hp);
     }
 
     void OnCollisionEnter2D(Collision2D col)
