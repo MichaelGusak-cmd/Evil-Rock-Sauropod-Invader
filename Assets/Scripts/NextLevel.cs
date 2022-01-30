@@ -14,7 +14,6 @@ public class NextLevel : MonoBehaviour
     }
 
     void OnTriggerEnter2D (Collider2D other) {
-        print("Trigger");
         if (other.CompareTag("Player")) {
             sceneManager.GetComponent<SceneChanger>().ChangeScene(NextScene);
         }

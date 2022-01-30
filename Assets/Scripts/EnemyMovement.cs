@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour{
 
+    public GameObject enemy;
+
     public float range = 3F;
-    public float health = 10;
+    public float health = 1;
     public float objectSpeed = 0.00005F;
 
     private float enemyX, baseX;
@@ -36,5 +38,11 @@ public class EnemyMovement : MonoBehaviour{
       enemyX = transform.position.x;
       
       transform.Translate(move); // this is what moves the object
+    }
+
+    void OnTriggerEnter2D(Collider2D col){
+      if(col.CompareTag("PlayerWeapon")) {
+        Destroy(enemy.gameObject);
+      }
     }
 }
