@@ -9,11 +9,11 @@ public class SceneChanger : MonoBehaviour
 	public string prevScene;
 
 	void Start()
-    {
-        DontDestroyOnLoad(this.gameObject);  //Allow this object to persist between scene changes
+	{
+		DontDestroyOnLoad(this.gameObject);  //Allow this object to persist between scene changes
 		prevScene = "Menu";
 		currScene = "Menu";
-    }
+	}
 
 	public void ChangeScene(string sceneName)
 	{
@@ -21,7 +21,7 @@ public class SceneChanger : MonoBehaviour
 		currScene = sceneName;
 		SceneManager.LoadScene(sceneName);
 	}
-	
+  
 	public void PrevScene() 
 	{
 		currScene = prevScene;

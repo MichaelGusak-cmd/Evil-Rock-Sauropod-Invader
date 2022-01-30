@@ -141,12 +141,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2160484c132a05e43981b1372c75d50c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: 5
+  playerHP: 9
   speed: 8
   acceleration: 30
   gravity: 20
   jumpHeight: 12
   invincibilityDuration: 1.5
+  healthPoints: []
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -162,4 +163,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18bce3bf6a6cac645bc41ae74215d5bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 3600554131140071560, guid: 1e8e390e3cee6e441bfcd9d9cbba51cc, type: 3}
+  weapon: {fileID: 1742292757129788207, guid: 8c4b4898662ceb746a7d84065b4b5404, type: 3}
