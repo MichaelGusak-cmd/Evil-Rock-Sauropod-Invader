@@ -7,10 +7,18 @@ public class PlayerController : MonoBehaviour
 {
 
     // Player handling
-    public float speed = 8;
-    public float acceleration = 30;
-    public float gravity = 20;
-    public float jumpHeight = 12;
+    public int playerHP = 5;
+    public float speed = 8f;
+    public float acceleration = 30f;
+    public float gravity = 20f;
+    public float jumpHeight = 12f;
+    public float invincibilityDuration = 1.5f;
+
+    public LayerMask enemyLayer;
+    private int enemylayer;
+
+    private float playerInvincibleTimer;
+    private bool playerInvincible;
 
     private float currentSpeed;
     private float targetSpeed;
@@ -18,10 +26,14 @@ public class PlayerController : MonoBehaviour
 
     private PlayerPhysics playerPhysics;
 
+    private Enemy enemyScript;
+    private bool gotScript = false;
+
     // Start is called before the first frame update
     void Start()
     {
         playerPhysics = GetComponent<PlayerPhysics>();
+        enemylayer = (int)Mathf.Log(enemyLayer.value, 2);
     }
 
     // Update is called once per frame
@@ -65,4 +77,32 @@ public class PlayerController : MonoBehaviour
             return (dir == Mathf.Sign(target-currentSpeed))? currentSpeed: target; // if currentSpeed has now passed target speed, return target, otherwise return currentSpeed
         }
     }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        //if col is on layer enemy:
+        GameObject obj = col.gameObject;
+        if (obj.layer == enemyLayer)
+        {
+            if (!gotScript)
+            {
+                enemyScript = obj.GetComponent<Enemy>(); //Assumes the existence of an "Enemy.cs" script
+                gotScript = true;
+            }
+
+            if (Time.time > playerInvincibleTimer)
+            { //if the player invincibility duration ran out
+                playerInvincible = false;
+            }
+            
+            //take damage, make invincible
+            if (!playerInvincible)
+            {
+                playerHP -= enemyScript.damage;
+                playerInvincibleTimer = Time.time + invincibilityDuration;
+                playerInvincible = true;
+            }
+        }
+    }
 }
+//scriptName = gameObject.GetComponent<ScriptName>();
