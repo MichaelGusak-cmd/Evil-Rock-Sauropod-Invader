@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3600554131140071560, guid: 1e8e390e3cee6e441bfcd9d9cbba51cc, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: PlayerWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 4149884444163592171, guid: 1e8e390e3cee6e441bfcd9d9cbba51cc, type: 3}
       propertyPath: m_Size.x
