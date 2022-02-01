@@ -2,6 +2,7 @@
 CSSA game jam game, Jan 2022
 
 Written in 48 hours by:
+
     - Aaron: Coder, Level design, Play Tester, World Creation
     - Daniel: Coder, Controller & Physics
     - Luke: Team Management, Design Organizer
